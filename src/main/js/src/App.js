@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Card from './card/Card';
+import Album from './component/Album';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Card />
-      </div>
+      <React.Fragment>
+        <Album />
+      </React.Fragment>      
     );
   }
 }
