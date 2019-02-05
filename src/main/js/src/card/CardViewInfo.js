@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
  
-class CardView extends Component{
+class CardViewInfo extends Component{
 
     constructor(props){
         super(props);
@@ -48,7 +48,7 @@ class CardView extends Component{
     }
 }
 
-CardView.propTypes = {
+CardViewInfo.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
@@ -67,4 +67,4 @@ const styles = theme => ({
     }
 });  
 
-export default withStyles(styles)(CardView);
+export default withStyles(styles)(CardViewInfo);
