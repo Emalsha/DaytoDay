@@ -59,10 +59,21 @@
 
 	<build>
 		<plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+	</build>
+
+</project>
+
+
+<!-- <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			</plugin> -->
 			<!-- <plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
@@ -141,7 +152,4 @@
 					</execution> -->
 				<!-- </executions>
 			</plugin> -->
-		</plugins>
-	</build>
-
-</project>
+		<!-- </plugins> -->
