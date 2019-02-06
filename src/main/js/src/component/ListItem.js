@@ -9,6 +9,7 @@ import BallotIcon from '@material-ui/icons/Ballot';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Link } from '@material-ui/core';
 
 export const mainListItems = (
   <div>
@@ -18,7 +19,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/cards">
       <ListItemIcon>
         <StyleIcon />
       </ListItemIcon>

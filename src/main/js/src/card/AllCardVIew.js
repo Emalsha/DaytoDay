@@ -8,8 +8,10 @@ function AllCardView(props) {
   return (
     <React.Fragment>
       <main>
-        { isCardViewEnable ? <CardViewInfo /> : ""}
-        { isCardAvailable ? <CardComponent/> : "No Card Available"}
+        { //isCardViewEnable ? <CardViewInfo /> : ""}
+        }
+        { //isCardAvailable ? <CardComponent/> : "No Card Available"}
+        }
       </main>
     </React.Fragment>
   );

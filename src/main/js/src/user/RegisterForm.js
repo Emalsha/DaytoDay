@@ -65,8 +65,9 @@ class Checkout extends React.Component {
     this.setState({user:user}); 
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
     
+    event.preventDefault();
     const { user } = this.state;
 
     fetch('/api/users',{
@@ -77,11 +78,12 @@ class Checkout extends React.Component {
         },
         body: JSON.stringify(user),
     })
-        .then(res => res.json())
-        .then(msg=>{
-            console.log(msg);
+        .then(res =>{
+          if(res.ok){
+            
+          }
         })
-
+        .catch(err => console.log(err));
   };
 
   render() {
@@ -100,6 +102,7 @@ class Checkout extends React.Component {
                 <Typography variant="h6" gutterBottom>
                 Your Data
                 </Typography>
+                <form onSubmit={this.handleSubmit}>
                 <Grid container spacing={24}>
                     <Grid item xs={12} sm={6}>
                         <TextField required id="firstName" name="firstName" label="First name" fullWidth autoComplete="fname" onChange={this.handleChange}/>
@@ -120,9 +123,10 @@ class Checkout extends React.Component {
                         <TextField id="password" name="password" label="Password" type="password" fullWidth autoComplete="Password" onChange={this.handleChange} />
                     </Grid>
                     <div className={classes.buttons}>
-                        <Button variant="contained" color="primary" onClick={this.handleSubmit} className={classes.button} > Continue</Button>
+                        <Button variant="contained" color="primary" type="submit" className={classes.button} > Continue</Button>
                     </div>
                 </Grid>
+                </form>
             </React.Fragment>
           </Paper>
         </main>

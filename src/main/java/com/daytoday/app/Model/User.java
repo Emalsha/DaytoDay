@@ -2,20 +2,17 @@ package com.daytoday.app.Model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.Data;
 
 @Data
-@Entity
 public class User{
 
-    private @Id @GeneratedValue Long id;
+    private @Id String id;
     private String firstName;
     private String lastName;
     private String username;

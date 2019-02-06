@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import AppBar from '@material-ui/core/AppBar';
@@ -32,7 +32,6 @@ const styles = theme => ({
         duration: theme.transitions.duration.enteringScreen,
       }),
     },
-    appBarSpacer: theme.mixins.toolbar,
     grow: {
       flexGrow: 1,
     },
@@ -120,7 +119,7 @@ const styles = theme => ({
         width: theme.spacing.unit * 9,
       },
     },
-    
+    appBarSpacer: theme.mixins.toolbar,
 });
 
 class AppBarStatic extends Component{
@@ -146,7 +145,7 @@ class AppBarStatic extends Component{
         const { open } = this.state;
 
         return(
-          <div className={classes.root}>
+          <React.Fragment>
             <AppBar position="absolute" className={classNames(classes.appBar, open && classes.appBarShift)}>
             <Toolbar  disableGutters={!open} className={classes.toolbar}>
             <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, open && classes.menuButtonHidden,)}>
@@ -187,7 +186,7 @@ class AppBarStatic extends Component{
               <Divider />
               <List>{secondaryListItems}</List>
             </Drawer>
-            </div>
+          </React.Fragment>
         );
     }
 
