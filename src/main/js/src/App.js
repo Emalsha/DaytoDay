@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AppBarStatic from './component/AppBarStatic';
 import { CssBaseline } from '@material-ui/core';
 import Footer from './component/Footer';
+import Dashboard from './component/Dashboard';
 
 const AllCard = lazy(() => import('./card/AllCardVIew'));
 const Register = lazy(()=> import('./user/RegisterForm'));

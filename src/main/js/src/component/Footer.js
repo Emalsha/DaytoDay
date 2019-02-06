@@ -19,6 +19,9 @@ const styles = theme => ({
     footer: {
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing.unit * 6,
+        position: "absolute",
+        width:"100%",
+        bottom:0,
     },
 });
 

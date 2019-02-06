@@ -19,6 +19,7 @@
 		<frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
 		<node.version>v10.13.0</node.version>
 		<yarn.version>v1.13.0</yarn.version>
+		<deploy>dev</deploy>
 	</properties>
 
 	<dependencies>
@@ -65,6 +66,21 @@
             </plugin>
         </plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>app-deploy-plugin</id>
+			<activation>
+				<property><name>!deploy.dev</name></property>
+			</activation>
+			<build>
+				<plugins>
+
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
 
