@@ -1,0 +1,3 @@
+spring.data.rest.base-path=/api
+
+spring.data.mongodb.uri=mongodb+srv://###:###@cluster0-3435.mongodb.net/dbins?retryWrites=true
