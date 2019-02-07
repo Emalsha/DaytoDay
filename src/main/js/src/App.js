@@ -15,11 +15,9 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    // height: '100vh',
     overflow: 'auto',
     position:"relative",
     marginTop:"64px",
-    overflow:"auto",
   },
 });
 
@@ -32,12 +30,10 @@ class App extends Component {
         <CssBaseline />
         <AppBarStatic appName="Day-to-Day"/>
           <main className={classes.content}>
-            <Router>
               <Suspense fallback={<div>Loading...</div>}>
                 <Route exact path="/cards" component={AllCard} /> 
-                <Route path="/register" component={Register} /> 
+                <Route exact path="/register" component={Register} /> 
               </Suspense>
-            </Router>
           </main>
         <Footer />
       </div>

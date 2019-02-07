@@ -37,7 +37,7 @@ const styles = theme => ({
   },
 });
 
-class Checkout extends React.Component {
+class Register extends React.Component {
 
   constructor(props){
     super(props);
@@ -80,7 +80,7 @@ class Checkout extends React.Component {
     })
         .then(res =>{
           if(res.ok){
-            
+            //TODO : Make endpoint response boolean by overiding the save method
           }
         })
         .catch(err => console.log(err));
@@ -135,8 +135,8 @@ class Checkout extends React.Component {
   }
 }
 
-Checkout.propTypes = {
+Register.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Checkout);
+export default withStyles(styles)(Register);

@@ -9,11 +9,11 @@ import BallotIcon from '@material-ui/icons/Ballot';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Link } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/register">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
@@ -25,19 +25,19 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Cards" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/goals">
       <ListItemIcon>
         <BallotIcon />
       </ListItemIcon>
       <ListItemText primary="Goals" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/reports">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="/motivations">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
