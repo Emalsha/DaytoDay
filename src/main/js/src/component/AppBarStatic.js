@@ -39,12 +39,6 @@ const styles = theme => ({
       marginLeft: 12,
       marginRight: 36,
     },
-    title: {
-      flexGrow:1,
-      [theme.breakpoints.up('sm')]: {
-        display: 'block',
-      },
-    },
     search: {
       position: 'relative',
       borderRadius: theme.shape.borderRadius,
@@ -116,43 +110,48 @@ const styles = theme => ({
       }),
       width: theme.spacing.unit * 7,
       [theme.breakpoints.up('sm')]: {
-        width: theme.spacing.unit * 9,
+        width: theme.spacing.unit * 7,
       },
     },
     appBarSpacer: theme.mixins.toolbar,
+    title: {
+      flexGrow:1,
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
+      },
+    },
+    appNameStyle1:{
+      position:'absolute',
+      marginTop:'-18px',
+    },
+    appNameStyle2:{
+      fontSize:'3rem',
+      position:'absolute',
+      marginLeft: '24px',
+      marginTop: '-7px'
+
+    },
+    appNameStyle3:{
+      position:'absolute',
+      marginTop: '5px',
+      marginLeft: '50px',
+    }
 });
 
 class AppBarStatic extends Component{
 
-    constructor(props){
-      super(props);
-
-      this.state = {
-        open:true,
-      }
-    }
-    
-    handleDrawerOpen = () => {
-      this.setState({ open: true });
-    };
-  
-    handleDrawerClose = () => {
-      this.setState({ open: false });
-    };
-
     render(){
-        const { classes, appName } = this.props;
-        const { open } = this.state;
+        const { classes, open, handleOpen, handleClose } = this.props;
 
         return(
           <React.Fragment>
             <AppBar position="absolute" className={classNames(classes.appBar, open && classes.appBarShift)}>
             <Toolbar  disableGutters={!open} className={classes.toolbar}>
-            <IconButton color="inherit" aria-label="Open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton, open && classes.menuButtonHidden,)}>
+            <IconButton color="inherit" aria-label="Open drawer" onClick={handleOpen} className={classNames(classes.menuButton, open && classes.menuButtonHidden,)}>
               <MenuIcon />
             </IconButton>
-              <Typography className={classes.title} component="h1" variant="h6" color="inherit" noWrap>
-                { appName }
+              <Typography className={classes.title} component="div" color="inherit" noWrap>
+                <span className={classes.appNameStyle1}>DAY</span><span className={classes.appNameStyle2}>2</span><span className={classes.appNameStyle3}>DAY</span>
               </Typography>
               <div className={classes.grow} />
               <div className={classes.search}>
@@ -177,7 +176,7 @@ class AppBarStatic extends Component{
               open = { open }
             >
               <div className={classes.toolbarIcon}>
-                <IconButton onClick={this.handleDrawerClose}>
+                <IconButton onClick={handleClose}>
                   <ChevronLeftIcon />
                 </IconButton>
               </div>

@@ -22,26 +22,11 @@ class CardViewInfo extends Component{
             <div className={classes.heroUnit}>
                 <div className={classes.heroContent}>
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Hi! { this.state.username }, Welcome to your cards.
+                    CARD 
                     </Typography>
                     <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                    Minimalistic Journal is a good way to measure and monitor your daily activity, progress and achievement. 
-                    Here you can see all of your current cards. Each card represent your day. It shoows most important things to know about your day.
+                    Each card represent your day. It shoows most important things to know about your day.
                     </Typography>
-                    <div className={classes.heroButtons}>
-                    <Grid container spacing={16} justify="center">
-                        <Grid item>
-                        <Button variant="contained" color="primary">
-                            Main call to action
-                        </Button>
-                        </Grid>
-                        <Grid item>
-                        <Button variant="outlined" color="primary">
-                            Secondary action
-                        </Button>
-                        </Grid>
-                    </Grid>
-                    </div>
                 </div>
             </div>
         );
