@@ -1,6 +1,7 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 src/main/resources/application.properties
+src/main/js/src/Auth/Auth.js
 
 ### STS ###
 .apt_generated

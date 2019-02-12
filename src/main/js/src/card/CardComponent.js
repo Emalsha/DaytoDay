@@ -48,7 +48,7 @@ class CardComponent extends Component{
     }
 
     async componentDidMount(){
-        fetch('/api/cards')
+        fetch('/api/cards?sort=dayNumber')
         .then(res => res.json())
         .then(msg => { 
                 this.setState({ cards:msg._embedded.cards, isLoading:false,})

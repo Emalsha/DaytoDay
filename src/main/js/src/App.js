@@ -6,10 +6,12 @@ import Footer from './component/Footer';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Auth from './auth/Auth';
 
 const Home = lazy(()=> import('./Home'));
 const AllCard = lazy(() => import('./card/AllCardVIew'));
 const Register = lazy(()=> import('./user/RegisterForm'));
+const auth = new Auth();
 
 class App extends Component {
 
@@ -39,7 +41,7 @@ class App extends Component {
         <AppBarStatic open={ open } handleOpen={this.handleDrawerOpen} handleClose={this.handleDrawerClose } />
           <main className={classNames(classes.content, open && classes.drawerMarginOpen)}>
               <Suspense fallback={<div>Loading...</div>}>
-                <Route exact path="/" component={ Home } /> 
+                <Route exact path="/" component={() => <Home auth={auth}/>}  />
                 <Route exact path="/cards" component={AllCard} /> 
                 <Route exact path="/register" component={Register} /> 
               </Suspense>

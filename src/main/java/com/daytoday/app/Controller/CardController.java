@@ -33,10 +33,9 @@ public class CardController {
         long numberOfDays = ChronoUnit.DAYS.between(bday,today);
         Card card = new Card(numberOfDays, "Wait for it...", 4, 0);
         cardRepository.save(card);
-
+        CheckMissedCard();
     }
 
-    @Scheduled(cron = sheduleTime)
     public void CheckMissedCard() {
         
         LocalDate checkDate = LocalDate.parse("2019-02-09"); // Registered Date
@@ -47,7 +46,7 @@ public class CardController {
                 log.info("CREATE OLD CARD : " + checkDate.toString());
                 LocalDate bday = LocalDate.parse("1994-02-24"); // TODO : to get from current user
                 long numberOfDays = ChronoUnit.DAYS.between(bday,checkDate);
-                Card card = new Card(numberOfDays, "Past cards...", 0, 0);
+                Card card = new Card(numberOfDays, "Nothing Special. (Generated Text)", 0, 0);
                 cardRepository.save(card);
             }
             checkDate = checkDate.plusDays(1);
