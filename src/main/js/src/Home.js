@@ -5,34 +5,40 @@ import { withStyles, Typography, Grid, Button } from '@material-ui/core';
 
 class Home extends Component {
     
+    login = () => {
+        this.props.auth.login();
+    }
+
     render(){
         const { classes } = this.props; 
-        const username = "Amy";
         return(
             <Fragment>
             <div className={classes.heroUnit}>
                 <div className={classes.heroContent}>
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Hi! {username}, Welcome to your cards.
+                    Hi! , Welcome To Minimalistic Journal
                     </Typography>
                     <Typography variant="h6" align="center" color="textSecondary" paragraph>
                     Minimalistic Journal is a good way to measure and monitor your daily activity, progress and achievement. 
-                    Here you can see all of your current cards. 
+                    </Typography>
+                    <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                    DAY2DAY system will help you to keep track on your days...
                     </Typography>
                     <div className={classes.heroButtons}>
                     <Grid container spacing={16} justify="center">
                         <Grid item>
-                        <Button variant="contained" color="primary" component={ Link } to="/cards">
-                            Write First Card
+                        <Button variant="contained" color="primary" onClick={this.login}>
+                            Login / Register
                         </Button>
                         </Grid>
                         <Grid item>
-                        <Button variant="outlined" color="primary">
-                            Read More
-                        </Button>
+                        <a target="_blank" rel="noopener noreferrer" href="https://betterhumans.coach.me/draft-how-to-hack-your-brain-to-achieve-consistency-that-lasts-7f5fdc520d28">
+                            <Button variant="outlined" color="primary">   
+                                Read More
+                            </Button>
+                        </a>
                         </Grid>
                     </Grid>
-                    <Button onClick={ this.props.auth.login() }>LOGIN</Button>
                     </div>
                 </div>
             </div>

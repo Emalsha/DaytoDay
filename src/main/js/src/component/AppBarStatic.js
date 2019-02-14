@@ -11,7 +11,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from './ListItem';
 
-
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const drawerWidth = 240;
@@ -151,7 +150,7 @@ class AppBarStatic extends Component{
               <MenuIcon />
             </IconButton>
               <Typography className={classes.title} component="div" color="inherit" noWrap>
-                <span className={classes.appNameStyle1}>DAY</span><span className={classes.appNameStyle2}>2</span><span className={classes.appNameStyle3}>DAY</span>
+                  <span className={classes.appNameStyle1}>DAY</span><span className={classes.appNameStyle2}>2</span><span className={classes.appNameStyle3}>DAY</span>
               </Typography>
               <div className={classes.grow} />
               <div className={classes.search}>
