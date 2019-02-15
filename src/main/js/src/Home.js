@@ -1,13 +1,12 @@
 import React , { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { withStyles, Typography, Grid, Button } from '@material-ui/core';
 
+const login = ({auth}) => {
+    auth.login();
+}
+
 class Home extends Component {
-    
-    login = () => {
-        this.props.auth.login();
-    }
 
     render(){
         const { classes } = this.props; 
@@ -27,7 +26,7 @@ class Home extends Component {
                     <div className={classes.heroButtons}>
                     <Grid container spacing={16} justify="center">
                         <Grid item>
-                        <Button variant="contained" color="primary" onClick={this.login}>
+                        <Button variant="contained" color="primary" onClick={login(this.props)}>
                             Login / Register
                         </Button>
                         </Grid>
