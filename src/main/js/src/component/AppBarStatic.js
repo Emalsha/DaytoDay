@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton, InputBase, Drawer, Divider, List } from '@material-ui/core';
+import { IconButton, InputBase, Drawer, Divider, List, Button } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -139,33 +139,38 @@ const styles = theme => ({
 
 class AppBarStatic extends Component{
 
+    logout = () => {
+      this.props.auth.logout();
+    }
+
     render(){
         const { classes, open, handleOpen, handleClose } = this.props;
 
         return(
           <React.Fragment>
             <AppBar position="absolute" className={classNames(classes.appBar, open && classes.appBarShift)}>
-            <Toolbar  disableGutters={!open} className={classes.toolbar}>
-            <IconButton color="inherit" aria-label="Open drawer" onClick={handleOpen} className={classNames(classes.menuButton, open && classes.menuButtonHidden,)}>
-              <MenuIcon />
-            </IconButton>
-              <Typography className={classes.title} component="div" color="inherit" noWrap>
-                  <span className={classes.appNameStyle1}>DAY</span><span className={classes.appNameStyle2}>2</span><span className={classes.appNameStyle3}>DAY</span>
-              </Typography>
-              <div className={classes.grow} />
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
+              <Toolbar  disableGutters={!open} className={classes.toolbar}>
+                <IconButton color="inherit" aria-label="Open drawer" onClick={handleOpen} className={classNames(classes.menuButton, open && classes.menuButtonHidden,)}>
+                  <MenuIcon />
+                </IconButton>
+                <Typography className={classes.title} component="div" color="inherit" noWrap>
+                    <span className={classes.appNameStyle1}>DAY</span><span className={classes.appNameStyle2}>2</span><span className={classes.appNameStyle3}>DAY</span>
+                </Typography>
+                <div className={classes.grow} />
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                  />
                 </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                />
-              </div>
-            </Toolbar>
+                <Button color="inherit" onClick={ this.logout }>Logout</Button>
+              </Toolbar>
             </AppBar>
             <Drawer
               variant="permanent"
