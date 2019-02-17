@@ -2,16 +2,13 @@ import React , { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Typography, Grid, Button } from '@material-ui/core';
 
-const login = ({auth}) => {
-    auth.login();
-}
-
 class Home extends Component {
-
-    render(){
-        const { classes } = this.props; 
-        return(
-            <Fragment>
+  render() {
+    const { isAuthenticated, login } = this.props.auth;
+    const { classes } = this.props; 
+    return (
+      <div className="container">
+      <Fragment>
             <div className={classes.heroUnit}>
                 <div className={classes.heroContent}>
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
@@ -26,7 +23,7 @@ class Home extends Component {
                     <div className={classes.heroButtons}>
                     <Grid container spacing={16} justify="center">
                         <Grid item>
-                        <Button variant="contained" color="primary" onClick={login(this.props)}>
+                        <Button variant="contained" color="primary" onClick={login.bind(this)}>
                             Login / Register
                         </Button>
                         </Grid>
@@ -42,9 +39,29 @@ class Home extends Component {
                 </div>
             </div>
             </Fragment>
-        );
-    }
-    
+        {
+          isAuthenticated() && (
+              <h4>
+                You are logged in!
+              </h4>
+            )
+        }
+        {
+          !isAuthenticated() && (
+              <h4>
+                You are not logged in! Please{' '}
+                <a style={{cursor:'pointer'}}
+                  onClick={login.bind(this)}
+                >
+                  Log In
+                </a>
+                {' '}to continue.
+              </h4>
+            )
+        }
+      </div>
+    );
+  }
 }
 
 const styles = theme => ({

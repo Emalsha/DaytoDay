@@ -1,18 +1,22 @@
-import history from './history';
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0.config';
+import history from './history';
 
 export default class Auth {
   accessToken;
   idToken;
   expiresAt;
+  userProfile;
+  scopes;
+  requestedScopes = 'openid profile read:messages write:messages';
 
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
+   // audience: AUTH_CONFIG.apiUrl,
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: this.requestedScopes
   });
 
   constructor() {
@@ -20,9 +24,11 @@ export default class Auth {
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+    this.userHasScopes = this.userHasScopes.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
     this.getIdToken = this.getIdToken.bind(this);
     this.renewSession = this.renewSession.bind(this);
+    this.getProfile = this.getProfile.bind(this);
   }
 
   login() {
@@ -34,7 +40,7 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
       } else if (err) {
-        history.replace('/');
+        history.replace('/home');
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -59,8 +65,11 @@ export default class Auth {
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
 
+    // Set the users scopes
+    this.scopes = authResult.scope || this.requestedScopes || '';
+
     // navigate to the home route
-    history.replace('/dashboard');
+    history.replace('/home');
   }
 
   renewSession() {
@@ -75,17 +84,32 @@ export default class Auth {
     });
   }
 
+  getProfile(cb) {
+    this.auth0.client.userInfo(this.accessToken, (err, profile) => {
+      if (profile) {
+        this.userProfile = profile;
+      }
+      cb(err, profile);
+    });
+  }
+
   logout() {
     // Remove tokens and expiry time
     this.accessToken = null;
     this.idToken = null;
     this.expiresAt = 0;
 
+    // Remove user scopes
+    this.scopes = null;
+
+    // Remove user profile
+    this.userProfile = null;
+
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem('isLoggedIn');
 
     // navigate to the home route
-    history.replace('/');
+    history.replace('/home');
   }
 
   isAuthenticated() {
@@ -93,5 +117,10 @@ export default class Auth {
     // access token's expiry time
     let expiresAt = this.expiresAt;
     return new Date().getTime() < expiresAt;
+  }
+
+  userHasScopes(scopes) {
+    const grantedScopes = this.scopes.split(' ');
+    return scopes.every(scope => grantedScopes.includes(scope));
   }
 }

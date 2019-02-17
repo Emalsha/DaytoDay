@@ -1,6 +1,6 @@
 import React, { Component, Fragment, Suspense, lazy } from "react";
 import AppBarStatic from "./AppBarStatic";
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Footer from "./Footer";
 import classNames from 'classnames';
 import { withStyles } from "@material-ui/core";
@@ -13,12 +13,6 @@ import Home from "../Home";
 
 const AllCard = lazy(() => import('./../card/AllCardVIew'));
 const Register = lazy(()=> import('./../user/RegisterForm'));
-const auth = new Auth(); 
-const handleAuthentication = ({location}) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-}
 
 class AppRoute extends Component{
     constructor(props){
@@ -30,8 +24,15 @@ class AppRoute extends Component{
     }
 
     componentDidMount() {
+      const auth = new Auth(); 
       const { renewSession } = auth;
-  
+      
+      const handleAuthentication = ({location}) => {
+        if (/access_token|id_token|error/.test(location.hash)) {
+          auth.handleAuthentication();
+        }
+      }
+      
       if (localStorage.getItem('isLoggedIn') === 'true') {
         renewSession();
       }
@@ -51,17 +52,28 @@ class AppRoute extends Component{
         const { classes } = this.props;
         return(
           <Fragment>
-              { auth.isAuthenticated() ? <AppBarStatic open={ open } auth={auth} handleOpen={this.handleDrawerOpen} handleClose={this.handleDrawerClose } /> : "" }
-              <main className={classNames(classes.content, auth.isAuthenticated() && open && classes.drawerMarginOpen)}>
+              { this.auth.isAuthenticated() ? <AppBarStatic open={ open } auth={this.auth} handleOpen={this.handleDrawerOpen} handleClose={this.handleDrawerClose } /> : "" }
+              <main className={classNames(classes.content, this.auth.isAuthenticated() && open && classes.drawerMarginOpen)}>
                 <Router history={history}>
                   <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
-                      <Route exact path="/" component={()=> <Home auth={auth}/>}/>
-                      <PrivateRoute exact path="/dashboard" auth={auth} component={()=> "Dashboard"} /> 
-                      <PrivateRoute exact path="/cards" auth={auth} component={AllCard} /> 
-                      <PrivateRoute exact path="/register" auth={auth} component={Register} /> 
-                      <Route path="/callback" render={(props) => {
-                        handleAuthentication(props);
+                      <Route exact path="/" component={()=> <Home auth={this.auth}/>}/>
+                      <Route exact path="/dashboard" render={(props) => (
+                        !this.auth.isAuthenticated() ? (
+                          <Redirect to="/home"/>
+                        ) : (
+                          <Register auth={this.auth} {...props} />
+                        )
+                      )} />
+                      <Route exact path="/cards" render={(props) => (
+                        !this.auth.isAuthenticated() ? (
+                          <Redirect to="/home"/>
+                        ) : (
+                          <AllCard auth={this.auth} {...props} />
+                        )
+                      )} />
+                      <Route exact path="/callback" render={(props) => {
+                        this.handleAuthentication(props);
                         return <Callback {...props} /> 
                       }}/>
                       <Route path="*" component={() => "404! Page Not Found"}/>
