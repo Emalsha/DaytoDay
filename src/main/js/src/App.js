@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CssBaseline, Button } from '@material-ui/core';
+import AppBarStatic from './component/AppBarStatic';
 
 class App extends Component {
   goTo(route) {
@@ -23,14 +24,14 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated, userHasScopes } = this.props.auth;
+    const { isAuthenticated, /*userHasScopes */ } = this.props.auth;
 
     return (
       <React.Fragment>
         <CssBaseline />
+
         <div>
             <Button
-              bsStyle="primary"
               className="btn-margin"
               onClick={this.goTo.bind(this, 'home')}
             >
@@ -40,7 +41,6 @@ class App extends Component {
               !isAuthenticated() && (
                   <Button
                     id="qsLoginBtn"
-                    bsStyle="primary"
                     className="btn-margin"
                     onClick={this.login.bind(this)}
                   >
@@ -51,18 +51,16 @@ class App extends Component {
             {
               isAuthenticated() && (
                   <Button
-                    bsStyle="primary"
                     className="btn-margin"
                     onClick={this.goTo.bind(this, 'cards')}
                   >
-                    Profile
+                    Cards
                   </Button>
                 )
             }
             {
               isAuthenticated() && (
                   <Button
-                    bsStyle="primary"
                     className="btn-margin"
                     onClick={this.goTo.bind(this, 'ping')}
                   >
@@ -75,7 +73,6 @@ class App extends Component {
               isAuthenticated() && (
                   <Button
                     id="qsLogoutBtn"
-                    bsStyle="primary"
                     className="btn-margin"
                     onClick={this.logout.bind(this)}
                   >

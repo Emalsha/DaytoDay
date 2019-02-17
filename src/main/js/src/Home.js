@@ -7,59 +7,41 @@ class Home extends Component {
     const { isAuthenticated, login } = this.props.auth;
     const { classes } = this.props; 
     return (
-      <div className="container">
       <Fragment>
-            <div className={classes.heroUnit}>
-                <div className={classes.heroContent}>
-                    <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Hi! , Welcome To Minimalistic Journal
-                    </Typography>
-                    <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                    Minimalistic Journal is a good way to measure and monitor your daily activity, progress and achievement. 
-                    </Typography>
-                    <Typography variant="h6" align="center" color="textSecondary" paragraph>
-                    DAY2DAY system will help you to keep track on your days...
-                    </Typography>
-                    <div className={classes.heroButtons}>
-                    <Grid container spacing={16} justify="center">
-                        <Grid item>
-                        <Button variant="contained" color="primary" onClick={login.bind(this)}>
-                            Login / Register
-                        </Button>
-                        </Grid>
-                        <Grid item>
-                        <a target="_blank" rel="noopener noreferrer" href="https://betterhumans.coach.me/draft-how-to-hack-your-brain-to-achieve-consistency-that-lasts-7f5fdc520d28">
-                            <Button variant="outlined" color="primary">   
-                                Read More
+        <div className={classes.heroUnit}>
+            <div className={classes.heroContent}>
+                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                Hi! , Welcome To Minimalistic Journal
+                </Typography>
+                <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                Minimalistic Journal is a good way to measure and monitor your daily activity, progress and achievement. 
+                </Typography>
+                <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                DAY2DAY system will help you to keep track on your days...
+                </Typography>
+                <div className={classes.heroButtons}>
+                <Grid container spacing={16} justify="center">
+                    <Grid item>
+                        {
+                        !isAuthenticated() && (
+                            <Button variant="contained" color="primary" onClick={login.bind(this)}>
+                                Login / Register
                             </Button>
-                        </a>
-                        </Grid>
+                        )
+                        }
                     </Grid>
-                    </div>
+                    <Grid item>
+                    <a target="_blank" rel="noopener noreferrer" href="https://betterhumans.coach.me/draft-how-to-hack-your-brain-to-achieve-consistency-that-lasts-7f5fdc520d28">
+                        <Button variant="outlined" color="primary">   
+                            Read More
+                        </Button>
+                    </a>
+                    </Grid>
+                </Grid>
                 </div>
             </div>
-            </Fragment>
-        {
-          isAuthenticated() && (
-              <h4>
-                You are logged in!
-              </h4>
-            )
-        }
-        {
-          !isAuthenticated() && (
-              <h4>
-                You are not logged in! Please{' '}
-                <a style={{cursor:'pointer'}}
-                  onClick={login.bind(this)}
-                >
-                  Log In
-                </a>
-                {' '}to continue.
-              </h4>
-            )
-        }
-      </div>
+        </div>
+    </Fragment>        
     );
   }
 }
